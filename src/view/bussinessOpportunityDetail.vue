@@ -252,7 +252,7 @@
                                                 </div>  
                                             </div>
                                         </el-collapse-item>
-                                        <div v-if="type == '1'  && index <= 5" @click='rightOpenNewWindow(index + 1,item.step)' v-for="(item,index) in needDealList_1" class="el-collapse-item">
+                                        <div v-if="type == '1'  && index <= 1" @click='rightOpenNewWindow(index + 1,item.step)' v-for="(item,index) in needDealList_1" class="el-collapse-item">
                                             <div role="button" class="el-collapse-item__header hover-class">
                                                 <img class="icon_collapse" src="../img/collapse_icon.png" alt="">{{item.name}} 
                                                 <i v-if="item.step" class="el-collapse-item__arrow el-icon-arrow-right"></i>
@@ -270,13 +270,30 @@
                                                 <div class="label_txt" @click="rightOpenNewWindow(null,'17')">下单信息</div>
                                             </el-col>
                                             <el-col :span="24">
-                                                <div class="label_txt" @click="rightOpenNewWindow(null,'19')">交付信息</div>
+                                                <div class="label_txt" @click="rightOpenNewWindow(null,'18')">交付信息</div>
                                             </el-col>
                                             <el-col :span="24">
                                                 <div class="label_txt" @click="rightOpenNewWindow(null,'30')">回款信息</div>
                                             </el-col>
                                         </el-collapse-item>
-                                        <div v-if="type == '1' && index > 5" @click='rightOpenNewWindow(index + 1,item.step)' v-for="(item,index) in needDealList_1" class="el-collapse-item">
+                                        <el-collapse-item v-if="type == '1'" name="4">
+                                            <template slot="title">
+                                                <img class="icon_collapse" src="../img/collapse_icon.png" alt="">商机复盘
+                                            </template>
+                                            <el-col :span="24">
+                                                <div class="label_txt" @click="rightOpenNewWindow(null,'101')">关闭商机</div>
+                                            </el-col>
+                                            <el-col :span="24">
+                                                <div class="label_txt" @click="rightOpenNewWindow(null,'32')">重启商机</div>
+                                            </el-col>
+                                            <el-col :span="24">
+                                                <div class="label_txt" @click="rightOpenNewWindow(null,'100')">分配商机</div>
+                                            </el-col>
+                                            <el-col :span="24">
+                                                <div class="label_txt" @click="rightOpenNewWindow(null,'28')">分配记录</div>
+                                            </el-col>
+                                        </el-collapse-item>
+                                        <div v-if="type == '1' && index > 1" @click='rightOpenNewWindow(index + 1,item.step)' v-for="(item,index) in needDealList_1" class="el-collapse-item">
                                             <div role="button" class="el-collapse-item__header hover-class">
                                                 <img class="icon_collapse" src="../img/collapse_icon.png" alt="">{{item.name}} 
                                                 <i v-if="item.step" class="el-collapse-item__arrow el-icon-arrow-right"></i>
@@ -433,7 +450,7 @@ export default {
         //     })
         // },
         toFlowPage() {
-            let url = this.url_front + '/' + this.flowPathData.FUrl + '&stepId=11';
+            let url = this.url_front + '/' + this.flowPathData.FUrl;
             // console.log(url);
             window.open(url,'_blank')
         },
@@ -525,12 +542,13 @@ export default {
 
         getFlowPath() {
             let params = {
-                "FProjectId": this.id
+                "FProjectId": this.id,
+                "id": this.id
             }
             this.requestApi("VO_CrmBoToDoWork",params).then(res => {
                 if (res.data.records) {
                     this.flowPathData = res.data.records[0];
-                    // console.log(this.flowPathData);
+                    console.log(this.flowPathData);
                 }  
             }) 
         },
@@ -657,7 +675,12 @@ export default {
             let url = '';
             if (!step) {
                 return
-            } else if (step < 100){
+            } else if (step == '32') {
+                url = this.url_front + '/OperateProcessor?operate=CRM_BOInfo_M' + step + '&Table=CRM_BOInfo&ID=' + this.id + '&WindowType=1&extWindow=true&PopupWin=true';
+                this.url = url;
+                this.dialogVisible = true;
+            }
+            else if (step < 100){
                 url = this.url_front + '/OperateProcessor?operate=CRM_BOInfo_M' + step + '&Table=CRM_BOInfo&ID=' + this.id + '&WindowType=1&extWindow=true&PopupWin=true';
                 window.open(url,'_blank');
             } else if (step == '101') {
@@ -672,6 +695,14 @@ export default {
                 url = url = this.url_front + '/OperateProcessor?operate=CRM_BOInfo_FeedBack&Table=CRM_BOInfo&ID=' + this.id + '&WindowType=1&extWindow=true&PopupWin=true';
                 this.url = url;
                 this.dialogVisible = true;
+                let _that = this;
+                setTimeout( ()=> {
+                    const siframe = document.querySelector('#siframe')
+                    siframe.onload = function () {
+                        _that.isPageLoaded('2');
+                        console.log('iframe已加载完毕')
+                    }
+                }) 
             }
             console.log(url);
         },

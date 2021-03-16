@@ -25,6 +25,7 @@ export function _selectName(data) {
 export function _contrastStepName(list,id) {
     const stepName = [
         'Forecast',
+        'AZDispatch',
         'CL',
         'XD',
         'AZPlan',
