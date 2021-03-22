@@ -135,29 +135,38 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item v-if="form_label.FLength != 0" prop="FLength" label="长">
+                        <el-form-item v-if="form_label.FP != 0" prop="FP" label="P">
+                            <el-input type="number" size='small' v-model="form_value.FP"></el-input>
+                        </el-form-item>
+                        <el-form-item v-if="form_label.FLength != 0" prop="FLength" label="L">
                             <el-input type="number" size='small' v-model="form_value.FLength"></el-input>
                         </el-form-item>
-                        <el-form-item v-if="form_label.FWidth != 0" prop="FWidth" label="宽">
+                        <el-form-item v-if="form_label.FWidth != 0" prop="FWidth" label="W">
                             <el-input type="number" size='small' v-model="form_value.FWidth"></el-input>
                         </el-form-item>
-                        <el-form-item v-if="form_label.FLength2 != 0" prop="FLength2" label="长2">
+                        <el-form-item v-if="form_label.FLength2 != 0" prop="FLength2" label="L1">
                             <el-input type="number" size='small' v-model="form_value.FLength2"></el-input>
                         </el-form-item>
-                        <el-form-item v-if="form_label.FWidth2 != 0" prop="FWidth2" label="宽2">
+                        <el-form-item v-if="form_label.FWidth1 != 0" prop="FWidth1" label="W1">
+                            <el-input type="number" size='small' v-model="form_value.FWidth1"></el-input>
+                        </el-form-item>
+                        <el-form-item v-if="form_label.FWidth2 != 0" prop="FWidth2" label="W2">
                             <el-input type="number" size='small' v-model="form_value.FWidth2"></el-input>
                         </el-form-item>
-                        <el-form-item v-if="form_label.FHeight != 0" prop="FHeight" label="高">
+                        <el-form-item v-if="form_label.FHeight != 0" prop="FHeight" label="H">
                             <el-input type="number" size='small' v-model="form_value.FHeight"></el-input>
                         </el-form-item>
-                        <el-form-item v-if="form_label.FAngle != 0" prop="FAngle" label="角度">
+                        <el-form-item v-if="form_label.FAngle != 0" prop="FAngle" label="∠1(角度)">
                             <el-input type="number" size='small' v-model="form_value.FAngle"></el-input>
                         </el-form-item>
-                        <el-form-item v-if="form_label.FAngle2 != 0" prop="FAngle2" label="角度2">
+                        <el-form-item v-if="form_label.FAngle2 != 0" prop="FAngle2" label="∠2(角度)">
                             <el-input type="number" size='small' v-model="form_value.FAngle2"></el-input>
                         </el-form-item>
                         <el-form-item v-if="form_label.FOuter != 0" prop="FOuter" label="外弧长">
                             <el-input type="number" size='small' v-model="form_value.FOuter"></el-input>
+                        </el-form-item>
+                        <el-form-item v-if="form_label.FOuterR != 0" prop="FOuterR" label="外R">
+                            <el-input type="number" size='small' v-model="form_value.FOuterR"></el-input>
                         </el-form-item>
                         <el-form-item v-if="form_label.FSideA != 0" prop="FSideA" label="A边">
                             <el-input size='small' v-model="form_value.FSideA"></el-input>

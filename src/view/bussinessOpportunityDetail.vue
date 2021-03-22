@@ -443,12 +443,6 @@ export default {
         }
     },
     methods: {
-        // getInputDataInfo() {
-        //     let params = {"FBoID": this.id};
-        //     this.requestApi('CP_InPutDataInfo_MInput',params).then(res => {
-        //         debugger
-        //     })
-        // },
         toFlowPage() {
             let url = this.url_front + '/' + this.flowPathData.FUrl;
             // console.log(url);
@@ -579,24 +573,15 @@ export default {
                 FSchedule = this.infoData.FSchedule - 10; 
             } 
             if (this.type == '1' &&  this.currentStatus != '3' && index > this.infoData.FSchedule) {
-                this.$message({
-                    message: '暂未完成报备！',
-                    type: 'warning'
-                });
+                this.judgeStatus(this.currentStatus);
                 return 
             }
             if (this.type == '1' && this.currentStatus == '2') {
-                this.$message({
-                    message: '审核中不能编辑！',
-                    type: 'warning'
-                });
+                this.judgeStatus(this.currentStatus);
                 return 
             }
             if (this.type == '2' && this.currentStatus != '3' && index > FSchedule && index !='1' && index != '2') {
-                this.$message({
-                    message: '暂未完成报备！',
-                    type: 'warning'
-                });
+                this.judgeStatus(this.currentStatus);
                 return 
             }
             if (this.type == '1') {
@@ -666,10 +651,7 @@ export default {
         },
         rightOpenNewWindow(id,step) {
             if (this.currentStatus != '3' && step == '102') {
-                this.$message({
-                    message: '暂未完成报备！',
-                    type: 'warning'
-                });
+                this.judgeStatus(this.currentStatus);
                 return 
             }
             let url = '';
@@ -798,6 +780,23 @@ export default {
                 }
             }
             return flagList;
+        },
+
+        judgeStatus(status) {
+            let text = '';
+            if (status == '2') {
+                text = '暂未完成报备！';
+            } else if (status == '6') {
+                text = '商机已关闭！'
+            } else if (status == '4') {
+                text = '商机已驳回，需重新报备！'
+            } else {
+                text = '暂不能编辑！'
+            }
+            this.$message({
+                message:  text,
+                type: 'warning'
+            });
         },
 
         loop_2 (list) {
