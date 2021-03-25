@@ -154,7 +154,7 @@ const messList = [
             },
             {
                 label: 'FWin1',
-                name: '项目赢单率',
+                name: '项目赢单率%',
                 value: ''
             },
             {
@@ -597,7 +597,7 @@ const messList_1 = [
             },
             {
                 label: 'FWin1',
-                name: '项目赢单率',
+                name: '项目赢单率%',
                 value: ''
             },
             {

@@ -73,18 +73,20 @@
                                         <el-col v-if="sitem.label =='FPurchasingUnit'" class="mt8" :span='24'>
                                             <el-image 
                                                 v-for='(titem,tindex) in tableData_3' :key="tindex"
-                                                @click="downLoadImg(titem.thumbnail)" class="cursor_pointer"
+                                                class="cursor_pointer"
                                                 style="width:100px;height:100px;margin-right:20px;"
                                                 :src="url_front + titem.thumbnail"
+                                                :preview-src-list="srcList_1"
                                                 >
                                             </el-image>
                                         </el-col>
                                         <el-col v-if="sitem.label =='FScenePhotos'" class="mt8" :span='24'>
                                             <el-image 
                                                 v-for='(titem,tindex) in tableData_4' :key="tindex"
-                                                @click="downLoadImg(titem.thumbnail)" class="cursor_pointer"
+                                                class="cursor_pointer"
                                                 style="width:100px;height:100px;margin-right:20px;"
                                                 :src="url_front + titem.thumbnail"
+                                                :preview-src-list="srcList_2"
                                                 >
                                             </el-image>
                                         </el-col>
@@ -227,7 +229,7 @@
                             <el-row>
                                 <el-col :span="24">
                                     <el-collapse v-model="activeName" accordion>
-                                        <el-collapse-item v-if="type == '1'" name="1">
+                                        <el-collapse-item name="1">
                                             <template slot="title">
                                                 <img class="icon_collapse" src="../img/collapse_icon.png" alt="">流程待办
                                             </template>
@@ -401,7 +403,9 @@ export default {
             customerS5Mess: [],
             flowPathData: [],
             popupFlag: false,
-            todays: ''
+            todays: '',
+            srcList_1: [],
+            srcList_2: []
         }
     },
     created() {
@@ -761,8 +765,10 @@ export default {
                                 this.tableData_2 = this._loop1(list[key]);
                             } else if (key == 'FPurchasingUnit' ) {
                                 this.tableData_3 = this._loop1(list[key]);
+                                this.srcList_1 = this.loop_6(this.tableData_3);
                             } else if (key == 'FScenePhotos' ) {
                                 this.tableData_4 = this._loop1(list[key]);
+                                this.srcList_2 = this.loop_6(this.tableData_4);
                             } else if (key == 'FContractFile' ) {
                                 this.tableData_5 = this._loop1(list[key]);
                             } else if (key == 'FProductQuotation2' ) {
@@ -827,6 +833,15 @@ export default {
             }
             return str;
         },
+
+        loop_6(arr) {
+            let list = [];
+            for (let i = 0; i < arr.length; i ++ ) {
+                let str = this.url_front + arr[i].thumbnail
+                list.push(str);
+            }
+            return list;
+        }
         
     }
 }
