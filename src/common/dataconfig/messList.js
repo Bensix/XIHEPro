@@ -784,10 +784,10 @@ const needDealList_1 = [
     //     name: '报价与测算',
     //     step: '14'
     // },
-    // {
-    //     name: '项目授权/保护',
-    //     step: '33'
-    // },
+    {
+        name: '项目授权/保护',
+        step: '33'
+    },
     {
         name: '合同信息',
         step: '15'
